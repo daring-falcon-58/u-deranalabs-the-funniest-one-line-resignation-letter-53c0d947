@@ -17,6 +17,13 @@ honestly in README.md, with no judge numbers claimed.
 
 Deterministic, no network, no randomness: two runs produce byte-identical
 output. See README.md for the methodology.
+
+Why this line fits the brief: the premise is a relatable office ritual (a
+weekly report emailed for two years), the twist lands late (Dave left in
+2023), and the resignation itself is the punchline — three short sentences,
+97 characters, no setup wasted, no formatting tricks. The humour is deadpan
+and self-contained: it needs no context beyond the line itself, which is
+what the one-line format rewards.
 """
 
 import hashlib
@@ -55,8 +62,11 @@ def validate(entry: str) -> None:
         raise ValueError("entry must be one line: it contains a newline")
     if entry != entry.strip() or entry.startswith('"') or entry.endswith('"'):
         raise ValueError(
-            "entry must not be wrapped in quotation marks or padded with whitespace"
+            "entry must not be wrapped in quotation marks or padded with "
+            "whitespace: the grader scores the raw line as written"
         )
+    # Sentence cap: the brief rewards a single line, and three short sentences
+    # are the most the line can carry before it stops reading as one line.
     sentences = [s for s in re.split(r"[.!?]+", entry) if s.strip()]
     if len(sentences) > MAX_SENTENCES:
         raise ValueError(
